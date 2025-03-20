@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import Button from "../shared/button";
 import { GoArrowUpRight } from "react-icons/go";
 
@@ -22,11 +23,15 @@ const featureData = [
     }
 ];
 
-// Component to render individual feature card
+// Component to render individual feature card with animation
 const FeatureCard = ({ card, index }) => (
-    <div
+    <motion.div
         key={index}
         className="bg-white rounded-xl flex items-center justify-center flex-col py-8 px-4 border-2 border-blue-200"
+        initial={{ opacity: 0, y: 50 }} // Start faded and lower
+        whileInView={{ opacity: 1, y: 0 }} // Animate when in view
+        transition={{ duration: 0.6, delay: index * 0.2 }} // Staggered effect
+        viewport={{ once: true }} // Ensures animation happens only once
     >
         <img
             src={card.image}
@@ -34,16 +39,22 @@ const FeatureCard = ({ card, index }) => (
             className="w-16 h-16"
         />
         <p className="text-center mt-6 font-semibold">{card.text}</p>
-    </div>
+    </motion.div>
 );
 
 export default function Features() {
     return (
         // Main section with light blue background
-        <section className="bg-blue-100 px-36 pb-20">
+        <motion.section
+            className="bg-blue-100 px-36 pb-20 z-10"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+        >
             {/* Hero box with background image */}
             <div
-                className="flex rounded-lg items-center -translate-y-[50%] bg-center bg-cover"
+                className="flex rounded-lg items-center -translate-y-[50%] bg-center bg-cover z-50"
                 style={{ backgroundImage: 'url(/images/hero-bg.jpg)' }}
             >
                 {/* Overlay patterns */}
@@ -80,12 +91,18 @@ export default function Features() {
             </div>
 
             {/* Features section */}
-            <h1 className="text-4xl font-bold font-geist text-center -mt-10">
+            <motion.h1
+                className="text-4xl font-bold font-geist text-center -mt-10"
+                initial={{ opacity: 0, y: -30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                viewport={{ once: true }}
+            >
                 Why Choose&nbsp;
                 <span className="bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text">
                     Forex Pro Guru
                 </span>
-            </h1>
+            </motion.h1>
 
             {/* Grid of feature cards */}
             <div className="grid grid-cols-4 gap-10 mt-10">
@@ -93,6 +110,6 @@ export default function Features() {
                     <FeatureCard key={index} card={card} index={index} />
                 ))}
             </div>
-        </section>
+        </motion.section>
     );
 }

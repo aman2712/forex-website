@@ -1,34 +1,40 @@
 import React from "react";
+import { Parallax } from "react-scroll-parallax";
 
 // Component to render individual testimonial image
 const TestimonialImage = ({ src, alt, index }) => (
-    <figure>
-        <img src={src} alt={alt} key={index} />
+    <figure className="flex-shrink-0 mx-4">
+        <img src={src} alt={alt} className="w-32 h-auto object-contain" />
     </figure>
 );
 
 export default function Testimonials() {
-    // Array of testimonial image data
     const testimonialImages = [
         { src: "/images/company-1.png", alt: "Testimonial 1 | Forex Pro Guru" },
         { src: "/images/company-2.png", alt: "Testimonial 2 | Forex Pro Guru" },
         { src: "/images/company-3.jpg", alt: "Testimonial 3 | Forex Pro Guru" },
         { src: "/images/company-4.jpg", alt: "Testimonial 4 | Forex Pro Guru" },
         { src: "/images/company-5.png", alt: "Testimonial 5 | Forex Pro Guru" },
-        { src: "/images/company-1.png", alt: "Testimonial 1 | Forex Pro Guru" },
     ];
 
+    // Duplicate images for seamless looping
+    const duplicatedImages = [...testimonialImages, ...testimonialImages];
+
     return (
-        // Main section for testimonials with grid layout
-        <section className="bg-white grid grid-cols-6 items-center gap-25 px-20 -mt-20">
-            {testimonialImages.map((image, index) => (
-                <TestimonialImage
-                    key={index}
-                    src={image.src}
-                    alt={image.alt}
-                    index={index}
-                />
-            ))}
+        <section className="bg-white overflow-hidden z-100 relative py-8">
+            <Parallax
+                 translateX={[20, -20]}
+                 className="flex gap-20 items-center"
+            >
+                {duplicatedImages.map((image, index) => (
+                    <TestimonialImage
+                        key={index}
+                        src={image.src}
+                        alt={image.alt}
+                        index={index}
+                    />
+                ))}
+            </Parallax>
         </section>
     );
 }

@@ -9,18 +9,22 @@ import Clients from './components/ui/clients';
 import Instructions from './components/ui/instructions';
 import Footer from './components/ui/footer';
 
+import { ParallaxProvider } from 'react-scroll-parallax';
+
 function App() {
   return (
     <main>
-      <Navbar />
-      <Hero />
-      <Testimonials />
-      <Courses />
-      <Features />
-      <Numbers />
-      <Clients />
-      <Instructions />
-      <Footer />
+      <ParallaxProvider>
+        <Navbar />
+        <Hero />
+        <Testimonials />
+        <Courses />
+        <Features />
+        <Numbers />
+        <Clients />
+        <Instructions />
+        <Footer />
+      </ParallaxProvider>
     </main>
   );
 }

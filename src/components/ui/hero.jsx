@@ -2,19 +2,22 @@ import React from "react";
 import Button from "../shared/button";
 import { GoArrowUpRight } from "react-icons/go";
 import { FaCircleArrowRight } from "react-icons/fa6";
+import { Parallax } from "react-scroll-parallax";
 
 export default function Hero() {
     return (
         // Main hero section with full-screen height and background image
         <section className="max-h-[50rem] bg-center bg-cover relative">
             {/* Background image layer with reduced opacity */}
-            <div
-                className="absolute inset-0 bg-center bg-cover -z-2"
-                style={{
-                    backgroundImage: 'url(/images/hero-bg.jpg)',
-                    filter: 'opacity(0.2)'
-                }}
-            ></div>
+            <Parallax speed={-70}>
+                <div
+                    className="absolute inset-0 bg-center bg-cover -z-2 bg-fixed h-[40rem]"
+                    style={{
+                        backgroundImage: 'url(/images/hero-bg.jpg)',
+                        filter: 'opacity(0.2)'
+                    }}
+                ></div>
+            </Parallax>
 
             {/* Gradient overlay layer */}
             <div

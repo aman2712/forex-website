@@ -5,6 +5,23 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { motion } from "framer-motion";
+
+const fadeInVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
+};
+
+const staggerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+        opacity: 1,
+        y: 0,
+        transition: { delay: i * 0.2, duration: 0.6 },
+    }),
+};
+
+
 // Course data array containing course information
 const courseData = [
     {
@@ -105,11 +122,24 @@ export default function Courses() {
             </Slider>
 
             {/* Fundamentals section with enrollment information */}
-            <div className="mt-30 flex items-center border-t border-gray-300 pt-20 relative">
-                {/* book icon */}
-                <img src="/images/book.png" alt="Icon Book | FPG" className="absolute top-10 left-0 w-20 -rotate-12" />
+            <motion.div
+                className="mt-30 flex items-center border-t border-gray-300 pt-20 relative"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeInVariants}
+            >
+                {/* Book icon */}
+                <motion.img
+                    src="/images/book.png"
+                    alt="Icon Book | FPG"
+                    className="absolute top-10 left-0 w-20 -rotate-12"
+                    variants={staggerVariants}
+                    custom={0}
+                />
+
                 {/* Left column with title */}
-                <div className="flex-[0.4] pr-10">
+                <motion.div className="flex-[0.4] pr-10" variants={staggerVariants} custom={1}>
                     <h1 className="text-5xl/normal font-bold font-geist text-right">
                         Enroll <br />
                         <span className="bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text">
@@ -117,13 +147,17 @@ export default function Courses() {
                         </span>
                         <br />of Forex
                     </h1>
-                </div>
+                </motion.div>
 
                 {/* Vertical divider */}
-                <div className="w-2 h-72 rounded-md bg-gradient-to-b from-blue-600 to-blue-400"></div>
+                <motion.div
+                    className="w-2 h-72 rounded-md bg-gradient-to-b from-blue-600 to-blue-400"
+                    variants={staggerVariants}
+                    custom={2}
+                ></motion.div>
 
                 {/* Right column with course details */}
-                <div className="flex-[0.6] pl-10">
+                <motion.div className="flex-[0.6] pl-10" variants={staggerVariants} custom={3}>
                     <h1 className="text-3xl font-semibold font-geist mb-4">
                         Know about Forex Pro Guru
                     </h1>
@@ -131,13 +165,13 @@ export default function Courses() {
                         Our fundamentals of Forex course is designed to provide beginners with a strong foundation in Forex trading. With the focus on practical knowledge and learning.
                     </p>
                     <ul id="course-details">
-                        <li>Learn essential Forex concepts and strategies step by step.</li>
-                        <li>Gain insights from traders with real-world expertise.</li>
-                        <li>Apply your knowledge through simulations and case studies.</li>
-                        <li>Access resources anytime, anywhere to fit your schedule.</li>
+                        <motion.li variants={staggerVariants} custom={4}>Learn essential Forex concepts and strategies step by step.</motion.li>
+                        <motion.li variants={staggerVariants} custom={5}>Gain insights from traders with real-world expertise.</motion.li>
+                        <motion.li variants={staggerVariants} custom={6}>Apply your knowledge through simulations and case studies.</motion.li>
+                        <motion.li variants={staggerVariants} custom={7}>Access resources anytime, anywhere to fit your schedule.</motion.li>
                     </ul>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </section>
     );
 }
